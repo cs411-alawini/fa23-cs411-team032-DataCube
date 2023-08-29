@@ -1,1 +1,3 @@
-# fa23-cs411-team032-DataCube
+# Team032-DataCube
+
+## Release notes
