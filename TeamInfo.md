@@ -1,4 +1,4 @@
-# team032-DataCuebe
+# team032-DataCube
 
 ## Basic Information
 
