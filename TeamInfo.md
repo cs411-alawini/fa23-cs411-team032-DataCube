@@ -19,10 +19,7 @@
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-|             | TuberInsights - Empower|
-|   Title     |   Your YouTube Success |
-|             |    with Data-driven    |
-|             |        Insights        |
+|    Title    | TuberInsights - Empower Your YouTube Success with Data-driven Insights|
 | System URL  |      link_to_system    |
 | Video Link  |      link_to_video     |
 
