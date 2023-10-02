@@ -29,3 +29,6 @@ channel: Each Youtuber has its own channel. In the video table, each row will ha
 video: All info provided by the raw data is stored in this table. Besides, based on different CSV files of different locations, each row will have a region attribute. video reference to channel table by channel ID and reference to category table by category ID. 
 
 category: a table stores info about the category ID and its corresponding category name. 
+
+
+https://drive.google.com/file/d/1zRp-n04fmCjOtttVKy5z3MGmOKQkMytj/view?usp=sharing
