@@ -1,6 +1,6 @@
 ## ER:
 
-![ER](https://drive.google.com/file/d/1f8H-rAOM7L3d8hERAhGbMq5CYQ_qDX9L/view?usp=sharing)
+![ER](/project1_stage2_ER.png)
 
 ## FDs:
 
