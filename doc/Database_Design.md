@@ -1,6 +1,6 @@
 ## ER:
 
-![ER](/project1_stage2_ER.png)
+![ER](project1_stage2_ER.png)
 
 ## FDs:
 
