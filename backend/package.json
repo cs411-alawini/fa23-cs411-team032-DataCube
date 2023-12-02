@@ -1,0 +1,32 @@
+{
+  "name": "application",
+  "version": "1.0.0",
+  "description": "Backend for TuberInsights",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cs411-alawini/fa23-cs411-team032-DataCube.git"
+  },
+  "author": "Ziheng Cai Jiayi Gu Ao Shen Wenxiu Wei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cs411-alawini/fa23-cs411-team032-DataCube/issues"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mysql2": "^2.3.3",
+    "nodemon": "^1.11.0",
+    "express-mysql-session": "^2.1.7",
+    "express-session": "^1.17.2"
+  },
+
+  "homepage": "https://github.com/cs411-alawini/fa23-cs411-team032-DataCube#readme"
+}
