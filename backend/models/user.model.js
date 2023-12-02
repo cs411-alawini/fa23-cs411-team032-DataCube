@@ -37,4 +37,19 @@ UserModel.createUser =async (user) => {
         return Promise.resolve(results && results.affectedRows);
     }).catch((err) => Promise.reject(err));
 }
+
+UserModel.updateUser = (userID, user) => {
+    const baseQuery = `
+        UPDATE User SET username = ?, password = ?
+        WHERE userID = ?;
+    `;
+    return db.execute(baseQuery, [
+        user.username,
+        user.password,
+        userID
+    ]).then(([results, fields]) => {
+        return Promise.resolve(results && results.affectedRows);
+    }).catch((err) => Promise.reject(err));
+}
+
 module.exports  = UserModel;
