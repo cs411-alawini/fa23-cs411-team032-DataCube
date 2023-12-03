@@ -118,6 +118,22 @@ section, aside {
     align-items: center;
 }
 
+/* Submit Button Styles */
+#category-form button[type="submit"] {
+    width: 100%; /* Make the button full width */
+    padding: 15px; /* Increased padding for larger button */
+    border-radius: 3px;
+    border: none;
+    background-color: #333; /* Dark background to match the header */
+    color: white; /* White text color to stand out */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#category-form button[type="submit"]:hover {
+    background-color: #555; /* Lighter background on hover */
+}
+
 input[type="checkbox"] {
     margin-right: 5px;
 }
