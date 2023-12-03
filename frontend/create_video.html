@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Video</title>
+    <link rel="stylesheet" href="./css/create_video.css">
+    <!-- <link rel="stylesheet" href="./css/styles.css"> -->
+</head>
+<body class="create-video">
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="create_video.html">Create Video</a> <!-- Add other links as necessary -->
+            </div>
+            <!-- <div class="auth-links">
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+            </div> -->
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="form-container">
+            <header>
+                <h1>Add New Video</h1>
+            </header>
+            <form id="create-video-form">
+                <label for="videoID">Video ID:</label>
+                <input type="text" id="videoID" name="videoID" required>
+
+                <label for="channelID">Channel ID:</label>
+                <input type="text" id="channelID" name="channelID" required>
+
+                <label for="categoryID">Category ID:</label>
+                <input type="text" id="categoryID" name="categoryID" required>
+
+                <label for="dislikes">Dislikes:</label>
+                <input type="number" id="dislikes" name="dislikes" required>
+
+                <label for="likes">Likes:</label>
+                <input type="number" id="likes" name="likes" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+
+                <label for="tags">Tags:</label>
+                <input type="text" id="tags" name="tags" required>
+
+                <label for="trending_date">Trending Date:</label>
+                <input type="date" id="trending_date" name="trending_date" required>
+
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="comment_count">Comment Count:</label>
+                <input type="number" id="comment_count" name="comment_count" required>
+
+                <label for="view_count">View Count:</label>
+                <input type="number" id="view_count" name="view_count" required>
+
+                <label for="published_at">Published At:</label>
+                <input type="datetime-local" id="published_at" name="published_at" required>
+
+                <label for="region">Region:</label>
+                <input type="text" id="region" name="region" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2023 Your Website Name</p>
+    </footer>
+</body>
+</html>
