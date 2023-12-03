@@ -7,7 +7,7 @@ router.route('/:title')
 
 router.route('/:id')
     .delete(videoController.deleteVideo);
-    
+
 router.route('/top_trending')
     .post(videoController.getTop10TrendngVideosInCategories);
 
