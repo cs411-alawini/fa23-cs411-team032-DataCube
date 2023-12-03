@@ -65,6 +65,62 @@ nav a, .search-container button {
     background-color: #666; /* Hover effect */
 }
 
+/* Form container styles */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-login-register {
+    background-color: white;
+    padding: 60px; /* Increased padding */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Increased max width */
+    box-sizing: border-box;
+}
+
+.form-login-register h2 {
+    text-align: center;
+    margin-bottom: 30px; /* Increased margin bottom for more space */
+}
+
+.form-login-register input {
+    width: calc(100% - 20px); /* Adjust width accounting for padding */
+    padding: 15px; /* Increased padding */
+    margin-bottom: 30px; /* Increased margin bottom for more space */
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.form-login-register button {
+    width: calc(100% - 20px); /* Adjust width accounting for padding */
+    padding: 15px; /* Increased padding */
+    border-radius: 3px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-login-register button:hover {
+    background-color: #555;
+}
+
+.form-login-register p {
+    text-align: center;
+    margin-top: 20px; /* Added margin top for spacing */
+}
+
+.form-login-register a {
+    color: #333;
+    text-decoration: none; /* Removes underline from links */
+}
+
 .login-register {
     display: flex;
     align-items: center;
