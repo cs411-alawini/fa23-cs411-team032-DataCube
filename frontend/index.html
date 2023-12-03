@@ -14,10 +14,16 @@
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="create_video.html">Create Video</a>
-                <!-- <a href="#">Categories</a> -->
-                <!-- <a href="#">Top Videos</a> -->
-                <!-- <a href="#">About</a> -->
+                <!-- Other links -->
             </div>
+    
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" placeholder="Enter Video Name..." id="search-input">
+                <button type="button" id="search-button">Search</button>
+            </div>
+                   
+    
             <!-- Right-aligned links -->
             <div class="auth-links">
                 <a href="login.html">Login</a>
@@ -113,6 +119,15 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- Popup Modal -->
+    <div id="popup-modal" class="modal">
+    <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Search results will go here...</p>
+        </div>
+    </div>
 
         
 </body>

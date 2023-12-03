@@ -33,19 +33,37 @@ nav {
     width: 100%;
 }
 
-nav a {
+nav a, .search-container button {
     color: white;
     text-decoration: none;
     padding: 0 15px;
 }
 
-/*
-.login-register a {
-    color: white;
-    text-decoration: none;
-    padding: 0 15px;
+.search-container {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
 }
-*/
+
+.search-container input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    font-size: 1em;
+    border-radius: 4px;
+    border: none;
+}
+
+.search-container button {
+    padding: 8px;
+    background-color: #555; /* Darker background for the button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #666; /* Hover effect */
+}
 
 .login-register {
     display: flex;
@@ -118,6 +136,10 @@ section, aside {
     align-items: center;
 }
 
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
 /* Submit Button Styles */
 #category-form button[type="submit"] {
     width: 100%; /* Make the button full width */
@@ -134,10 +156,6 @@ section, aside {
     background-color: #555; /* Lighter background on hover */
 }
 
-input[type="checkbox"] {
-    margin-right: 5px;
-}
-
 /* Footer Styles */
 footer {
     background-color: #333;
@@ -145,62 +163,6 @@ footer {
     text-align: center;
     padding: 10px 0;
     margin-top: auto;
-}
-
-/* Form container styles */
-.form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.form-login-register {
-    background-color: white;
-    padding: 60px; /* Increased padding */
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px; /* Increased max width */
-    box-sizing: border-box;
-}
-
-.form-login-register h2 {
-    text-align: center;
-    margin-bottom: 30px; /* Increased margin bottom for more space */
-}
-
-.form-login-register input {
-    width: calc(100% - 20px); /* Adjust width accounting for padding */
-    padding: 15px; /* Increased padding */
-    margin-bottom: 30px; /* Increased margin bottom for more space */
-    border-radius: 3px;
-    border: 1px solid #ccc;
-}
-
-.form-login-register button {
-    width: calc(100% - 20px); /* Adjust width accounting for padding */
-    padding: 15px; /* Increased padding */
-    border-radius: 3px;
-    border: none;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.form-login-register button:hover {
-    background-color: #555;
-}
-
-.form-login-register p {
-    text-align: center;
-    margin-top: 20px; /* Added margin top for spacing */
-}
-
-.form-login-register a {
-    color: #333;
-    text-decoration: none; /* Removes underline from links */
 }
 
 /* Responsive adjustments */
@@ -215,10 +177,10 @@ footer {
         align-items: center;
     }
 
-    .login-register {
-        order: 2; /* Ensures login/register is below the nav links on smaller screens */
+    .login-register, .search-container {
+        order: 2; /* Ensures login/register and search bar are below the nav links on smaller screens */
         width: 100%; /* Full width on smaller screens */
-        justify-content: center; /* Center login/register on smaller screens */
+        justify-content: center; /* Center login/register and search bar on smaller screens */
         margin-top: 10px;
     }
 
@@ -238,3 +200,39 @@ footer {
     }
 }
 
+/* Popup Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
