@@ -11,4 +11,10 @@ router.route('/:id')
 router.route('/top_trending')
     .post(videoController.getTop10TrendngVideosInCategories);
 
+router.route('/top_trending_all')
+    .get(videoController.getTop10TrendngVideos);
+
+router.route('/time_stamp')
+    .get(videoController.countVideoByTimeStamp);
+
 module.exports = router;
