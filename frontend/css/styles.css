@@ -23,13 +23,13 @@ header {
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* This ensures space between nav links and auth links */
+    justify-content: space-between;
 }
 
 nav {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Separates nav links and auth links */
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -55,14 +55,14 @@ nav a, .search-container button {
 
 .search-container button {
     padding: 8px;
-    background-color: #555; /* Darker background for the button */
+    background-color: #555;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .search-container button:hover {
-    background-color: #666; /* Hover effect */
+    background-color: #666;
 }
 
 /* Form container styles */
@@ -75,30 +75,30 @@ nav a, .search-container button {
 
 .form-login-register {
     background-color: white;
-    padding: 60px; /* Increased padding */
+    padding: 60px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 500px; /* Increased max width */
+    max-width: 500px;
     box-sizing: border-box;
 }
 
 .form-login-register h2 {
     text-align: center;
-    margin-bottom: 30px; /* Increased margin bottom for more space */
+    margin-bottom: 30px;
 }
 
 .form-login-register input {
-    width: calc(100% - 20px); /* Adjust width accounting for padding */
-    padding: 15px; /* Increased padding */
-    margin-bottom: 30px; /* Increased margin bottom for more space */
+    width: calc(100% - 20px);
+    padding: 15px;
+    margin-bottom: 30px;
     border-radius: 3px;
     border: 1px solid #ccc;
 }
 
 .form-login-register button {
-    width: calc(100% - 20px); /* Adjust width accounting for padding */
-    padding: 15px; /* Increased padding */
+    width: calc(100% - 20px);
+    padding: 15px;
     border-radius: 3px;
     border: none;
     background-color: #333;
@@ -113,27 +113,26 @@ nav a, .search-container button {
 
 .form-login-register p {
     text-align: center;
-    margin-top: 20px; /* Added margin top for spacing */
+    margin-top: 20px;
 }
 
 .form-login-register a {
     color: #333;
-    text-decoration: none; /* Removes underline from links */
+    text-decoration: none;
 }
 
 .login-register {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Aligns login/register to the far right */
-    flex-grow: 0; /* Prevents it from growing */
-    margin-left: auto; /* Pushes it to the far right */
+    justify-content: flex-end;
+    flex-grow: 0;
+    margin-left: auto;
 }
 
 .login-register a {
-    /* Styles for login/register links */
     text-decoration: none;
     padding: 5px 10px;
-    margin-left: 10px; /* Spaces out the login/register links */
+    margin-left: 10px;
     background-color: #f0f0f0;
     color: #333;
     border: 1px solid #ccc;
@@ -143,7 +142,6 @@ nav a, .search-container button {
 }
 
 .login-register a:hover {
-    /* Hover effect for login/register links */
     background-color: #e0e0e0;
     color: #000;
 }
@@ -164,7 +162,7 @@ section, aside {
     padding: 20px;
     flex: none;
     margin: 10px;
-    width: calc(33.333% - 20px);
+    width: calc(50% - 20px);
 }
 
 /* Category Selection Styles */
@@ -198,18 +196,18 @@ input[type="checkbox"] {
 
 /* Submit Button Styles */
 #category-form button[type="submit"] {
-    width: 100%; /* Make the button full width */
-    padding: 15px; /* Increased padding for larger button */
+    width: 100%;
+    padding: 15px;
     border-radius: 3px;
     border: none;
-    background-color: #333; /* Dark background to match the header */
-    color: white; /* White text color to stand out */
+    background-color: #333;
+    color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 #category-form button[type="submit"]:hover {
-    background-color: #555; /* Lighter background on hover */
+    background-color: #555;
 }
 
 
@@ -242,8 +240,8 @@ footer {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .form-login-register {
-        padding: 30px; /* Smaller padding for smaller screens */
-        max-width: 90%; /* Allows the form to be more responsive */
+        padding: 30px;
+        max-width: 90%;
     }
 
     header, nav {
@@ -252,9 +250,9 @@ footer {
     }
 
     .login-register, .search-container {
-        order: 2; /* Ensures login/register and search bar are below the nav links on smaller screens */
-        width: 100%; /* Full width on smaller screens */
-        justify-content: center; /* Center login/register and search bar on smaller screens */
+        order: 2;
+        width: 100%;
+        justify-content: center;
         margin-top: 10px;
     }
 
@@ -276,57 +274,80 @@ footer {
 
 /* Popup Modal styles */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
   
-  .modal-content {
+.modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-  }
+}
   
-  .close {
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
+}
   
-  .close:hover,
-  .close:focus {
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
+/* Word Cloud Styles */
 #container {
-    width: 100%; /* Take the full width of its parent */
-    max-height: 350px; /* Set a maximum height */
-    overflow: auto; /* Enable scrolling if content overflows */
-    position: relative; /* Relative positioning for absolute children */
-    background-color: #fff; /* Optional background color */
+    width: 100%;
+    max-height: 350px;
+    overflow: auto;
+    position: relative;
+    background-color: #fff;
 }
 
 #container canvas {
-    height: auto; /* 设置一个最小高度 */
-    width: 100%; /* Full width to fit container */
-    position: absolute; /* Positioned absolutely to fit into the container */
+    height: auto;
+    width: 100%;
+    position: absolute;
     top: 0;
     left: 0;
 }
 
+/* Video Ranking Scrollable Styles */
+.video-ranking {
+    max-height: 400px; /* Change as needed */
+    overflow-y: auto; /* Enables scrolling for vertical overflow */
+    padding: 10px; /* Optional: for inner spacing */
+}
 
+.video-ranking-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space between items */
+}
 
+.rank {
+    margin-right: 10px;
+    font-weight: bold;
+}
 
-  
+.title {
+    flex-grow: 1;
+}
+
+.views {
+    margin-left: 10px;
+    color: #666;
+}
