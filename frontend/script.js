@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     // Fetch and display top ten videos for all categories when the page loads
-    fetch('http://localhost:4000/video/top_all_categories') // Replace with your actual endpoint
+    fetch('http://localhost:4000/video/top_trending_all') // Replace with your actual endpoint
         .then(response => response.json())
         .then(data => {
             if (data && data.data) {
@@ -100,6 +100,41 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
         .catch(error => {
             console.error('Error posting category IDs:', error);
+        });
+    });
+
+    const dateRangeForm = document.getElementById('date-range-form');
+    dateRangeForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get the values of the date inputs
+        const fromDate = document.getElementById('from-date').value;
+        const toDate = document.getElementById('to-date').value;
+
+        // Create an object with the date range
+        const dateRange = {
+            from: fromDate,
+            to: toDate
+        };
+
+        console.log('Date Range Submitted:', dateRange);
+
+        // Send the date range to the server
+        fetch('http://localhost:4000/video/top_trending_all', { // Replace with your actual endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dateRange)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle response data
+            console.log('Response from server:', data);
+            // You may want to do something with the response here
+        })
+        .catch(error => {
+            console.error('Error sending date range:', error);
         });
     });
 });
