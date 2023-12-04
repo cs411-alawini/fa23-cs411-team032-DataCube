@@ -32,6 +32,17 @@ const getVideoByTitle = async (req, res) => {
     }
 }
 
+const countVideoByTimeStamp = async (req, res) => {
+    try{
+        const videos = await videoModel.countVideoByTimeStamp(req.query.start, req.query.end);
+        // gr
+        res.status(200).send(formatResponse("Successfully get video by time stamp", videos));
+    }
+    catch(error){
+        res.status(404).send(formatResponse("Failed to get video by time stamp", error));
+    }
+}
+
 const deleteVideo = async (req, res) => {
     try{
         const videos = await videoModel.deleteVideo(req.body.videoID);
@@ -46,5 +57,6 @@ module.exports = {
     deleteVideo,
     getVideoByTitle,
     getTop10TrendngVideosInCategories,
-    getTop10TrendngVideos
+    getTop10TrendngVideos,
+    countVideoByTimeStamp
 }

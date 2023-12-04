@@ -14,4 +14,7 @@ router.route('/top_trending')
 router.route('/top_trending_all')
     .get(videoController.getTop10TrendngVideos);
 
+router.route('/time_stamp')
+    .get(videoController.countVideoByTimeStamp);
+
 module.exports = router;
