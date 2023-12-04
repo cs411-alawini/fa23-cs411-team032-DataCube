@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             results.forEach((result,index) => {
                 const listItem = document.createElement('div');
                 listItem.className = 'search-result-item';
+                listItem.setAttribute('data-video-id', result.videoID); 
                 listItem.innerHTML = `
                     <div class="rank">${index + 1}</div>
                     <div class="videoID">${result.videoID}</div>
@@ -132,6 +133,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Make a request to the backend to update the video
         // Handle the response
         const title = document.getElementById(`title_${videoID}`).textContent;
+        console.log(videoID);
+        console.log(title);
         fetch('http://localhost:4000/video',{
             method: 'PUT',
             headers: {
@@ -161,10 +164,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
         .then(data => {
             if(data.message === "Successfully delete video") {
                 console.log("Successfully delete video");
+                removeVideoElement(videoID);
             } else {
                 console.error('Failed to delete video');
             }
         })
+    }
+
+    function removeVideoElement(videoID) {
+        // Assuming each video element has an id or data attribute associated with its videoID
+        const videoElement = document.querySelector(`[data-video-id='${videoID}']`);
+        if (videoElement) {
+            videoElement.remove();
+        }
     }
     // When the user clicks on the close button, close the modal
     closeBtn.addEventListener('click', () => {
