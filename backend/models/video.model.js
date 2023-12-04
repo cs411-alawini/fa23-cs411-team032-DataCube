@@ -12,9 +12,10 @@ VideoModel.getTop10TrendngVideosInCategories = (categories) => {
 
 }
 
-VideoModel.getVideoByTitle = (titile) => {
+VideoModel.getVideoByTitle = (title) => {
+    console.log(title);
     const baseQuery = `
-        SELECT * FROM Video WHERE title = ${titile};
+        SELECT * FROM Video WHERE title LIKE '%${title}%';
     `;
     return db.execute(baseQuery).then(([results, fields]) => {
         return Promise.resolve(results)

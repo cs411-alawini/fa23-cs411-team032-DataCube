@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById("myModal"); // Change "myModal" to your modal's ID
     const searchBtn = document.getElementById("searchBtn"); // Change "searchBtn" to your search button's ID
     const closeBtn = document.querySelector(".close"); // Use the close class inside your modal
-
+    
     // When the user clicks the search button, open the modal
     searchBtn.addEventListener('click', () => {
         modal.style.display = "block";
