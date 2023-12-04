@@ -2,6 +2,8 @@
 var express = require('express'),
     router = express.Router(),
     bodyParser = require('body-parser');
+    path = require('path');
+
 // Create our Express application
 var app = express();
 var sessions = require('express-session');
@@ -22,6 +24,7 @@ var allowCrossDomain = function (req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     next();
 };
+
 app.use(allowCrossDomain);
 
 // Use the body-parser package in our application
@@ -29,6 +32,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+
+// Serve static files from the "frontend" directory
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 app.use((req, res, next) => {
     requestPrint(req.url);
     next();

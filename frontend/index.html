@@ -70,25 +70,38 @@
 
         <section class="word-cloud">
             <div>
-                <h1 id="normal">World Could</h1>
+                <h1 id="normal">Word Cloud</h1>
                 <div id="container" style="height: 400px;"></div>
                 <script src="dist/js2wordcloud.js"></script>
                 <script>
-                    var option = {
-                        tooltip: {
-                            show: true,
-                            formatter: function(item) {
-                                return item[0] + ': ' + item[1] + '<br>' + 'world cloud'
-                            }
-                        },
-                        list: [['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1], ['谈笑风生', 500000], ['谈笑风生', 50], ['谈笑风生', 40], ['谈笑风生', 40], ['谈笑风生', 30], ['谈笑风生', 30], ['谈笑风生', 20], ['谈笑风生', 20], ['谈笑风生', 1], ['谈笑风生', 1]],
-                        // list:[["玻璃瓶",941],["塑料瓶",15],["易拉罐",3]],
-                        color: '#15a4fa',
-                        shape: 'circle',
-                        ellipticity: 1
-                    }
-                    var wc = new Js2WordCloud(document.getElementById('container'))
-               
+                    // Fetch category count data from the server
+                    fetch('http://localhost:4000/category/count')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Assuming data is in the format: {"data": [["Category1", Count1], ["Category2", Count2]]}
+                        const wordCloudData = data.data.map(item => [item[0], item[1]]);
+                        
+                        var option = {
+                            tooltip: {
+                                show: true,
+                                formatter: function(item) {
+                                    return item[0] + ': ' + item[1] + '<br>' + 'world cloud';
+                                }
+                            },
+                            list: wordCloudData, // Use the fetched data for the word cloud list
+                            color: '#15a4fa',
+                            shape: 'circle',
+                            ellipticity: 1
+                        };
+                        
+                        var wc = new Js2WordCloud(document.getElementById('container'));
+                        wc.setOption(option);
+                    })
+
+                    .catch(error => {
+                        console.error('Error fetching the word cloud data:', error);
+                    });
+
                     wc.showLoading({
                         backgroundColor: '#fff',
                         text: 'Loading...',
@@ -119,6 +132,28 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="wordCloudData.js"></script>
+
+    <script>
+        // Fetch category count data from the server
+        fetch('http://localhost:4000/category/count')
+        .then(response => response.json())
+        .then(data => {
+            const wordCloudData = data.data.map(item => [item[0], item[1]]);
+            // Assuming you have a word cloud library and initialization code:
+            var option = {
+                // ... your word cloud options ...
+                list: wordCloudData
+                // ... other options ...
+            };
+            var wc = new Js2WordCloud(document.getElementById('container'));
+            wc.setOption(option);
+        })
+        .catch(error => {
+            console.error('Error fetching the word cloud data:', error);
+        });
+    </script>
+
 
     <!-- Popup Modal -->
     <div id="popup-modal" class="modal">
