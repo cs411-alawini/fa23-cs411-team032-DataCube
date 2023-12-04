@@ -22,6 +22,16 @@ const getTop10TrendngVideos = async (req, res) => {
     }
 }
 
+const createVideo = async (req, res) => {  
+    try{
+        const videos = await videoModel.createVideo(req.body);
+        res.status(200).send(formatResponse("Successfully create video", videos));
+    }
+    catch(error){
+        res.status(404).send(formatResponse("Failed to create video", error));
+    }
+}
+
 const getVideoByTitle = async (req, res) => {
     try{
         const videos = await videoModel.getVideoByTitle(req.query.title);
@@ -43,6 +53,16 @@ const countVideoByTimeStamp = async (req, res) => {
     }
 }
 
+const updateVideo = async (req, res) => {
+    try{
+        const videos = await videoModel.putVideo(req.body.videoID, req.body.title);
+        res.status(200).send(formatResponse("Successfully put video", videos));
+    }
+    catch(error){
+        res.status(404).send(formatResponse("Failed to put video", error));
+    }
+}
+
 const deleteVideo = async (req, res) => {
     try{
         const videos = await videoModel.deleteVideo(req.body.videoID);
@@ -54,9 +74,11 @@ const deleteVideo = async (req, res) => {
 }
 
 module.exports = {
+    updateVideo,
     deleteVideo,
     getVideoByTitle,
     getTop10TrendngVideosInCategories,
     getTop10TrendngVideos,
-    countVideoByTimeStamp
+    countVideoByTimeStamp,
+    createVideo
 }

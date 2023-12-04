@@ -3,10 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 router.route('/')
-    .get(videoController.getVideoByTitle);
-
-router.route('/:id')
+    .get(videoController.getVideoByTitle)
+    .post(videoController.createVideo)
+    .put(videoController.updateVideo)
     .delete(videoController.deleteVideo);
+   
 
 router.route('/top_trending')
     .post(videoController.getTop10TrendngVideosInCategories);

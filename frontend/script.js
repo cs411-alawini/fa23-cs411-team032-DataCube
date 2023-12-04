@@ -8,8 +8,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById("popup-modal");
     const searchBtn = document.getElementById("search-button");
     const closeBtn = document.querySelector(".close");
-    const searchTerm = document.getElementById("search-input");
-    const searchResult = document.getElementById("searchResult");
+    var searchTerm = document.getElementById("search-input");
+    var searchResult = document.getElementById("searchResult");
+
+    // Define a variable outside of your function to keep track of the chart instance
+    let myChart;
 
     // Function to update video rankings on the page
     function updateVideoRankings(videos) {
@@ -112,21 +115,66 @@ document.addEventListener('DOMContentLoaded', (event) => {
         {
             results.forEach((result,index) => {
                 const listItem = document.createElement('div');
-                listItem.className = 'search result';
+                listItem.className = 'search-result-item';
                 listItem.innerHTML = `
                     <div class="rank">${index + 1}</div>
                     <div class="videoID">Video ID: ${result.videoID}</div>
                     <div class="videoID">Channel ID: ${result.channelID}</div>
                     <div class="title">${result.title}</div>
                     <div class="views">${result.view_count.toLocaleString()} views</div>
+                    <button class="update-btn">Update</button>
+                    <button class="delete-btn">Delete</button>
                 `;
                 searchResult.appendChild(listItem);
+    
+                // Add event listeners for buttons
+                listItem.querySelector('.update-btn').addEventListener('click', () => updateVideo(result.videoID));
+                listItem.querySelector('.delete-btn').addEventListener('click', () => deleteVideo(result.videoID));
             });
         }
         else 
         {
             searchResult.textContent = "No Result Found!";
         }
+    }
+
+    function updateVideo(videoID){
+        // Make a request to the backend to update the video
+        // Handle the response
+        const title = document.getElementById(`title_${videoID}`).textContent;
+        fetch('http://localhost:4000/video',{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ videoID: videoID, title: title })
+        }).then(response => response.json())
+        .then(data => {
+            if(data.message === "Successfully update video") {
+                console.log("Successfully update video");
+            } else {
+                console.error('Failed to update video');
+            }
+        })
+    }
+    
+    function deleteVideo(videoID){
+        // Make a request to the backend to delete the video
+        // Handle the response
+        fetch('http://localhost:4000/video',{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ videoID: videoID })
+        }).then(response => response.json())
+        .then(data => {
+            if(data.message === "Successfully delete video") {
+                console.log("Successfully delete video");
+            } else {
+                console.error('Failed to delete video');
+            }
+        })
     }
     // When the user clicks on the close button, close the modal
     closeBtn.addEventListener('click', () => {
@@ -176,30 +224,70 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const fromDate = document.getElementById('from-date').value;
         const toDate = document.getElementById('to-date').value;
 
-        // Create an object with the date range
-        const dateRange = {
-            from: fromDate,
-            to: toDate
-        };
+        // Construct the URL with query parameters for the date range
+        const queryURL = new URL('http://localhost:4000/video/time_stamp');
+        queryURL.searchParams.append('start', fromDate);
+        queryURL.searchParams.append('end', toDate);
 
-        console.log('Date Range Submitted:', dateRange);
-
-        // Send the date range to the server
-        fetch('http://localhost:4000/video/top_trending_all', { // Replace with your actual endpoint
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dateRange)
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle response data
-            console.log('Response from server:', data);
-            // You may want to do something with the response here
-        })
-        .catch(error => {
-            console.error('Error sending date range:', error);
-        });
+        // Send the GET request to the server with the date range
+        fetch(queryURL)
+            .then(response => response.json())
+            .then(data => {
+                // Handle response data
+                console.log('Videos by time stamp:', data);
+                if(data.message === "Successfully get video by time stamp") {
+                    console.log('Data for chart:', data);
+                    createChart(data.data); // Call function to create chart with the data
+                } else {
+                    console.error('No data received for the given time range');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching videos by time stamp:', error);
+            });
     });
+
+    function createChart(videoData) {
+        console.log('Creating chart with data:', videoData);
+        const canvas = document.getElementById('time-chart');
+        if (!canvas) {
+            console.error('The canvas element was not found in the DOM');
+            return;
+        }
+    
+        const ctx = canvas.getContext('2d');
+        const labels = videoData.map(item => new Date(item.published_at).toLocaleDateString());
+        const counts = videoData.map(item => item['count']);
+    
+        console.log('Labels:', labels);
+        console.log('Counts:', counts);
+    
+        // If myChart is not null, destroy it before creating a new one
+        if (myChart instanceof Chart) { // More robust check
+            myChart.destroy();
+        }
+    
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Video Count',
+                    data: counts,
+                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    }
 });

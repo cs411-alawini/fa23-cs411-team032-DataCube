@@ -36,6 +36,30 @@ VideoModel.countVideoByTimeStamp = (start, end) => {
 
 }
 
+VideoModel.createVideo = (video) => {
+    const baseQuery = `
+        INSERT INTO Video (videoID, channelID, categoryID, dislikes, likes, description, tags, trending_date, title, comment_count, view_count, published_at, region)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    `;
+    return db.execute(baseQuery, [
+        video.videoID,
+        video.channelID,
+        video.categoryID,
+        video.dislikes,
+        video.likes,
+        video.description,
+        video.tags,
+        video.trending_date,
+        video.title,
+        video.comment_count,
+        video.view_count,
+        video.published_at,
+        video.region
+    ]).then(([results, fields]) => {
+        return Promise.resolve(results && results.affectedRows);
+    }).catch((err) => Promise.reject(err));
+}
+
 VideoModel.getVideoByTitle = (title) => {
     console.log(title);
     const baseQuery = `
@@ -43,6 +67,19 @@ VideoModel.getVideoByTitle = (title) => {
     `;
     return db.execute(baseQuery).then(([results, fields]) => {
         return Promise.resolve(results)
+    }).catch((err) => Promise.reject(err));
+}
+
+VideoModel.updateVideo = (videoID, title) => {
+    const baseQuery = `
+        UPDATE Video SET title = ?
+        WHERE videoID = ?;
+    `;
+    return db.execute(baseQuery, [
+        title,
+        videoID
+    ]).then(([results, fields]) => {
+        return Promise.resolve(results && results.affectedRows);
     }).catch((err) => Promise.reject(err));
 }
 
