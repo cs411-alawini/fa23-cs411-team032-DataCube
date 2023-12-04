@@ -4,6 +4,9 @@ const formatResponse = require('./utils').formatResponse;
 const getCategory = async (req, res) => {
     try{
         const categories = await CategoryModel.getAllCategories();
+        categories.forEach(element => {
+            element.categoryName = element.categoryName.substring(0, element.categoryName.length-1);
+        });
         res.status(200).send(formatResponse("Successfully get all categories", categories));
     }
     catch(error){
