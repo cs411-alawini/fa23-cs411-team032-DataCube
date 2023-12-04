@@ -38,6 +38,39 @@ UserModel.createUser =async (user) => {
     }).catch((err) => Promise.reject(err));
 }
 
+UserModel.usernameExists = (username) => {
+    return db.execute("SELECT * FROM User WHERE username=?",[username])
+    .then(([results, fields]) =>{
+        return Promise.resolve(!(results && results.length == 0));
+    })
+    .catch((err) => Promise.reject(err));
+}
+
+UserModel.authenticate = (username, password) => {
+    let userId;
+    let baseSQL = "SELECT id, username, password FROM User WHERE username=?;";
+    return db
+        .execute(baseSQL, [username])
+        .then(([results, fields]) => {
+            if (results && results.length == 1) {
+                userId = results[0].id;
+                return password == results[0].password;
+            }else{
+                return Promise.reject(-1);
+            }
+        })
+        .then((passwordsMatch) => {
+            if (passwordsMatch) {
+                return Promise.resolve(userId);
+            }else{
+                return Promise.resolve(-1);
+            }
+        })
+        .catch((err) => Promise.reject(err));
+};
+
+
+
 UserModel.updateUser = (userID, user) => {
     const baseQuery = `
         UPDATE User SET username = ?, password = ?

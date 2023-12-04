@@ -2,7 +2,7 @@ const videoController = require('../controllers/video.controller');
 const express = require('express');
 const router = express.Router();
 
-router.route('/:title')
+router.route('/')
     .get(videoController.getVideoByTitle);
 
 router.route('/:id')

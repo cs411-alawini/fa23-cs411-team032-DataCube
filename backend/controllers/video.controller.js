@@ -14,7 +14,7 @@ const getTop10TrendngVideosInCategories = async (req, res) => {
 
 const getVideoByTitle = async (req, res) => {
     try{
-        const videos = await videoModel.getVideoByTitle(req.body.title);
+        const videos = await videoModel.getVideoByTitle(req.query.title);
         res.status(200).send(formatResponse("Successfully get video by title", videos));
     }
     catch(error){

@@ -35,14 +35,16 @@
 
     <!-- Upper Part: World Map, Video Ranking, Category Selection -->
     <div class="upper-part">
-        <section class="world-map">
+        <!-- <section class="world-map">
             <h2>World Map</h2>
             <div id="map-placeholder">Map will go here</div>
-        </section>
+        </section> -->
 
         <section class="video-ranking">
             <h2>Ranking Top 10 Videos</h2>
-            <div id="ranking-placeholder">Rankings will go here</div>
+            <div id="ranking-placeholder" class="video-ranking">
+
+            </div>
         </section>
 
         <aside class="category-selection">
@@ -60,13 +62,12 @@
 
     <!-- Lower Part: Hot Tags, Word Cloud, Date and Time -->
     <div class="lower-part">
-        <section class="hot-tags">
+        <!-- <section class="hot-tags">
             <h2>Top 10 Hot Tags</h2>
             <ul id="tags-placeholder">
                 <li>#Tag1</li>
-                <!-- More tags -->
             </ul>
-        </section>
+        </section> -->
 
         <section class="word-cloud">
             <div>
@@ -77,10 +78,20 @@
             </div>
         </section>
 
+
         <section class="date-time">
             <h2>Date and Time</h2>
-            <div id="datetime-placeholder">Date/time will go here</div>
+            <form id="date-range-form">
+                <label for="from-date">From:</label>
+                <input type="date" id="from-date" name="from-date">
+                
+                <label for="to-date">To:</label>
+                <input type="date" id="to-date" name="to-date">
+                
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
         </section>
+        
     </div>
 
     <!-- Footer Section -->

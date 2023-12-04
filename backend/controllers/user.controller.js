@@ -12,15 +12,19 @@ const getUser = async (req, res) =>{
     }
 }
 
-const login = async (req, res) =>{
-    try {
-        // Parse the query parameters from the request
-        const users = await userModel.login(req.query.username, req.query.password);
-        res.send(formatResponse("Successfully get all users", users));
-    } catch (error) {
-        res.status(404).send(formatResponse("Failed to get all users", error));
+const login = async (req, res) => {
+  // try {
+    // Parse the query parameters from the request
+    const user = await userModel.authenticate(req.query.username, req.query.password);
+    if (user !== -1) {
+      res.status(200).send(formatResponse("Successfully check user", user));
+    } else {
+      res.status(404).send(formatResponse("Failed to check user", error));
     }
-  }
+  // } catch (error) {
+  //   res.status(404).send(formatResponse("Failed", error));
+  // }
+}
 
 const createUser = async (req, res) => {
 
