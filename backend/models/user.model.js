@@ -48,7 +48,7 @@ UserModel.usernameExists = (username) => {
 
 UserModel.authenticate = (username, password) => {
     let userId;
-    let baseSQL = "SELECT id, username, password FROM User WHERE username=?;";
+    let baseSQL = "SELECT userID, userName, password FROM User WHERE userName=?;";
     return db
         .execute(baseSQL, [username])
         .then(([results, fields]) => {

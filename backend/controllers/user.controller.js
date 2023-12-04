@@ -15,11 +15,11 @@ const getUser = async (req, res) =>{
 const login = async (req, res) => {
   // try {
     // Parse the query parameters from the request
-    const user = await userModel.authenticate(req.query.username, req.query.password);
+    const user = await userModel.authenticate(req.body.username, req.body.password);
     if (user !== -1) {
       res.status(200).send(formatResponse("Successfully check user", user));
     } else {
-      res.status(404).send(formatResponse("Failed to check user", error));
+      res.status(401).send(formatResponse("Invalid userName or Password!", user));
     }
   // } catch (error) {
   //   res.status(404).send(formatResponse("Failed", error));
