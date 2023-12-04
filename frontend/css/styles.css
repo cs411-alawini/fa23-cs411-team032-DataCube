@@ -327,7 +327,7 @@ footer {
 
 /* Video Ranking Scrollable Styles */
 .video-ranking {
-    max-height: 400px; /* Change as needed */
+    /* max-height: 400px; Change as needed */
     overflow-y: auto; /* Enables scrolling for vertical overflow */
     padding: 10px; /* Optional: for inner spacing */
 }
