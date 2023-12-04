@@ -212,6 +212,24 @@ input[type="checkbox"] {
     background-color: #555; /* Lighter background on hover */
 }
 
+
+/* Submit Button Styles */
+#date-range-form button[type="submit"] {
+    width: auto; /* 自适应按钮宽度，保持原始大小 */
+    padding: 5px; /* Increased padding for larger button */
+    border-radius: 3px;
+    border: none;
+    background-color: #333; /* Dark background to match the header */
+    color: white; /* White text color to stand out */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#date-range-form button[type="submit"]:hover {
+    background-color: #555; /* Lighter background on hover */
+}
+
+
 /* Footer Styles */
 footer {
     background-color: #333;
