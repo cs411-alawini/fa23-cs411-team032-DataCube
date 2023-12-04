@@ -25,7 +25,7 @@ VideoModel.getTop10TrendngVideos = (categories) => {
 
 VideoModel.countVideoByTimeStamp = (start, end) => {
     const baseQuery = `
-        SELECT published_at, count(*) FROM Video WHERE published_at BETWEEN '${start}' AND '${end}'
+        SELECT published_at, count(*) as count FROM Video WHERE published_at BETWEEN '${start}' AND '${end}'
         GROUP BY published_at
         ORDER BY published_at
         ;
