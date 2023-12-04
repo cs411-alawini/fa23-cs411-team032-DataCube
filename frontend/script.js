@@ -67,39 +67,58 @@ document.addEventListener('DOMContentLoaded', (event) => {
         .catch(error => console.error('Error fetching categories:', error));
 
 
-
+//----------------------------------search bar -------------------------------------------------------
     // Modal event listeners
     searchBtn.addEventListener('click', () => {
+        event.preventDefault();
         modal.style.display = "block";
         console.log("clicked");
         console.log(searchTerm.value);
         // You can add more code here to populate the modal with specific search results
-        var result = performSearch(searchTerm.value);
-        displayResult(result);
+        performSearch(searchTerm.value);
     });
 
 
     function performSearch(term){
-        fetch("http://localhost:4000/video/")
-            .then(response => response.json())
-            .then(data => {
-                
-            })
-        return term;
+        const url = `http://localhost:4000/video/?title=${encodeURIComponent(term)}`;
+        fetch(url)
+        .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            displayResult(data.data)
+          })
+          .catch(error => {
+            console.error('Error search key word:', error);
+          });        
     }
 
-    function displayResult(result){
+    function displayResult(results){
         searchResult.innerHTML = "";
-        if(result.length > 0)
+        console.log(results);
+        if(results.length > 0)
         {
-            searchResult.textContent = result;//temp
+            results.forEach((result,index) => {
+                const listItem = document.createElement('div');
+                listItem.className = 'search result';
+                listItem.innerHTML = `
+                    <div class="rank">${index + 1}</div>
+                    <div class="videoID">${index + 1}</div>
+
+                    <div class="title">${result.title}</div>
+                    <div class="views">${result.view_count.toLocaleString()} views</div>
+                `;
+                searchResult.appendChild(listItem);
+            });
         }
         else 
         {
             searchResult.textContent = "No Result Found!";
         }
     }
-
     // When the user clicks on the close button, close the modal
     closeBtn.addEventListener('click', () => {
         modal.style.display = "none";
@@ -111,6 +130,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
     
+
+
+//-----------------------------------------------------button for category ---------------------------------   
     // Form submission event
     form.addEventListener('submit', function(event) {
         event.preventDefault();
