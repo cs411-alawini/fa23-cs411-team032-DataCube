@@ -55,18 +55,18 @@ const countVideoByTimeStamp = async (req, res) => {
 
 const updateVideo = async (req, res) => {
     try{
-        const videos = await videoModel.putVideo(req.body.videoID, req.body.title);
-        res.status(200).send(formatResponse("Successfully put video", videos));
+        const videos = await videoModel.updateVideo(req.body.videoID, req.body.title);
+        res.status(200).send(formatResponse("Successfully update video", videos));
     }
     catch(error){
-        res.status(404).send(formatResponse("Failed to put video", error));
+        res.status(404).send(formatResponse("Failed to update video", error));
     }
 }
 
 const deleteVideo = async (req, res) => {
     try{
-        const videos = await videoModel.deleteVideo(req.body.videoID);
-        res.status(200).send(formatResponse("Successfully delete video", videos));
+        const video = await videoModel.deleteVideo(req.body.videoID);
+        res.status(200).send(formatResponse("Successfully delete video", video));
     }
     catch(error){
         res.status(404).send(formatResponse("Failed to delete video", error));

@@ -84,8 +84,9 @@ VideoModel.updateVideo = (videoID, title) => {
 }
 
 VideoModel.deleteVideo = (videoID) => { 
+    console.log(videoID);
     const baseQuery = `
-        DELETE FROM Video WHERE videoID = ${videoID};
+        DELETE FROM Video WHERE videoID = "${videoID}";
     `;
     return db.execute(baseQuery).then(([results, fields]) => {
         return Promise.resolve(results)
