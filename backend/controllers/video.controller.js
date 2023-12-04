@@ -68,5 +68,6 @@ module.exports = {
     getVideoByTitle,
     getTop10TrendngVideosInCategories,
     getTop10TrendngVideos,
-    countVideoByTimeStamp
+    countVideoByTimeStamp,
+    createVideo
 }
