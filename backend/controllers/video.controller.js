@@ -12,6 +12,16 @@ const getTop10TrendngVideosInCategories = async (req, res) => {
     }
 }
 
+const getTop10TrendngVideos = async (req, res) => {
+    try{
+        const videos = await videoModel.getTop10TrendngVideos();
+        res.status(200).send(formatResponse("Successfully get top 10 trending videos", videos));
+    }
+    catch(error){
+        res.status(404).send(formatResponse("Failed to get top 10 trending videos", error));
+    }
+}
+
 const getVideoByTitle = async (req, res) => {
     try{
         const videos = await videoModel.getVideoByTitle(req.query.title);
@@ -35,5 +45,6 @@ const deleteVideo = async (req, res) => {
 module.exports = {
     deleteVideo,
     getVideoByTitle,
-    getTop10TrendngVideosInCategories
+    getTop10TrendngVideosInCategories,
+    getTop10TrendngVideos
 }
