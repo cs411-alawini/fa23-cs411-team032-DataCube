@@ -1,14 +1,21 @@
-var wc;
 document.addEventListener('DOMContentLoaded', function() {
+    // Get the container element for the word cloud
     var container = document.getElementById('container');
-    container.style.height = '320px';
-    wc = new Js2WordCloud(container);
+    var wc = new Js2WordCloud(container);
 
+    // Function to update the word cloud with new data
     function updateWordCloud(data) {
         var list = data.map(function(item) {
+            // Assuming the format of your data is [["Category Name", count], ...]
             return [item[0], item[1]];
         });
         var option = {
+            tooltip: {
+                show: true,
+                formatter: function(item) {
+                    return item[0] + ': ' + item[1] + '<br>' + 'world cloud';
+                }
+            },
             list: list,
             color: '#15a4fa',
             shape: 'circle',
@@ -17,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         wc.setOption(option);
     }
 
+    // Function to fetch category count data
     function fetchCategoryData() {
         wc.showLoading({
             backgroundColor: '#fff',
@@ -28,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 wc.hideLoading();
-                updateWordCloud(data.data);
+                updateWordCloud(data.data); // Assuming 'data' is the object with a 'data' property
             })
             .catch(error => {
                 console.error('Error fetching category count data:', error);
@@ -36,5 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    // Load the word cloud data when the page loads
     fetchCategoryData();
 });

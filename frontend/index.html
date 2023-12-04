@@ -71,52 +71,9 @@
         <section class="word-cloud">
             <div>
                 <h1 id="normal">Word Cloud</h1>
-                <div id="container"></div>
+                <div id="container" style="height: 400px;"></div>
                 <script src="dist/js2wordcloud.js"></script>
-                <script>
-                    // Fetch category count data from the server
-                    fetch('http://localhost:4000/category/count')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Assuming data is in the format: {"data": [["Category1", Count1], ["Category2", Count2]]}
-                        const wordCloudData = data.data.map(item => [item[0], item[1]]);
-                        
-                        var option = {
-                            tooltip: {
-                                show: true,
-                                formatter: function(item) {
-                                    return item[0] + ': ' + item[1] + '<br>' + 'world cloud';
-                                }
-                            },
-                            list: wordCloudData, // Use the fetched data for the word cloud list
-                            color: '#15a4fa',
-                            shape: 'circle',
-                            ellipticity: 1
-                        };
-                        
-                        var wc = new Js2WordCloud(document.getElementById('container'));
-                        wc.setOption(option);
-                    })
 
-                    .catch(error => {
-                        console.error('Error fetching the word cloud data:', error);
-                    });
-
-                    wc.showLoading({
-                        backgroundColor: '#fff',
-                        text: 'Loading...',
-                        effect: 'spin'
-                    })
-                    setTimeout(function() {
-                        wc.hideLoading()
-                        wc.setOption(option)
-                    }, 2000)
-            
-                    setTimeout(function() {
-                        wc.setOption(option)
-                    }, 6000)
-            
-                </script>
             </div>
         </section>
 
@@ -141,6 +98,12 @@
             const wordCloudData = data.data.map(item => [item[0], item[1]]);
             // Assuming you have a word cloud library and initialization code:
             var option = {
+                tooltip: {
+                    show: true,
+                    formatter: function(item) {
+                        return item[0] + ': ' + item[1] + '<br>' + 'world cloud';
+                    }
+                },
                 // ... your word cloud options ...
                 list: wordCloudData
                 // ... other options ...
