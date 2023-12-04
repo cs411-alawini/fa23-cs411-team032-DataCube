@@ -46,7 +46,9 @@ const countVideoByTimeStamp = async (req, res) => {
     try{
         const videos = await videoModel.countVideoByTimeStamp(req.query.start, req.query.end);
         // gr
-        res.status(200).send(formatResponse("Successfully get video by time stamp", videos));
+
+        console.log(videos[0]);
+        res.status(200).send(formatResponse("Successfully get video by time stamp", videos[0]));
     }
     catch(error){
         res.status(404).send(formatResponse("Failed to get video by time stamp", error));
