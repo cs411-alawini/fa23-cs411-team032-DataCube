@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 router.route('/')
-    .get(videoController.getVideoByTitle);
+    .get(videoController.getVideoByTitle)
+    .post(videoController.createVideo);
 
 router.route('/:id')
     .delete(videoController.deleteVideo);
