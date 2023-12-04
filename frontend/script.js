@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById("popup-modal");
     const searchBtn = document.getElementById("search-button");
     const closeBtn = document.querySelector(".close");
+    var searchTerm = document.getElementById("search-input");
+    var searchResult = document.getElementById("searchResult");
 
     // Function to update video rankings on the page
     function updateVideoRankings(videos) {
@@ -64,6 +66,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
         .catch(error => console.error('Error fetching categories:', error));
 
+
+
     // Modal event listeners
     searchBtn.addEventListener('click', () => {
         modal.style.display = "block";
@@ -76,8 +80,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
     function performSearch(term){
-        var result;
-
+        fetch("http://localhost:4000/video/")
+            .then(response => response.json())
+            .then(data => {
+                
+            })
         return term;
     }
 
