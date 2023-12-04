@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById("popup-modal");
     const searchBtn = document.getElementById("search-button");
     const closeBtn = document.querySelector(".close");
+    var searchTerm = document.getElementById("search-input");
+    var searchResult = document.getElementById("searchResult");
 
     // Function to update video rankings on the page
     function updateVideoRankings(videos) {
@@ -64,11 +66,41 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
         .catch(error => console.error('Error fetching categories:', error));
 
+
+
     // Modal event listeners
     searchBtn.addEventListener('click', () => {
         modal.style.display = "block";
+        console.log("clicked");
+        console.log(searchTerm.value);
+        // You can add more code here to populate the modal with specific search results
+        var result = performSearch(searchTerm.value);
+        displayResult(result);
     });
 
+
+    function performSearch(term){
+        fetch("http://localhost:4000/video/")
+            .then(response => response.json())
+            .then(data => {
+                
+            })
+        return term;
+    }
+
+    function displayResult(result){
+        searchResult.innerHTML = "";
+        if(result.length > 0)
+        {
+            searchResult.textContent = result;//temp
+        }
+        else 
+        {
+            searchResult.textContent = "No Result Found!";
+        }
+    }
+
+    // When the user clicks on the close button, close the modal
     closeBtn.addEventListener('click', () => {
         modal.style.display = "none";
     });
