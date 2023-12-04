@@ -165,30 +165,55 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const fromDate = document.getElementById('from-date').value;
         const toDate = document.getElementById('to-date').value;
 
-        // Create an object with the date range
-        const dateRange = {
-            from: fromDate,
-            to: toDate
-        };
+        // Construct the URL with query parameters for the date range
+        const queryURL = new URL('http://localhost:4000/video/time_stamp');
+        queryURL.searchParams.append('start', fromDate);
+        queryURL.searchParams.append('end', toDate);
 
-        console.log('Date Range Submitted:', dateRange);
-
-        // Send the date range to the server
-        fetch('http://localhost:4000/video/top_trending_all', { // Replace with your actual endpoint
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dateRange)
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle response data
-            console.log('Response from server:', data);
-            // You may want to do something with the response here
-        })
-        .catch(error => {
-            console.error('Error sending date range:', error);
-        });
+        // Send the GET request to the server with the date range
+        fetch(queryURL)
+            .then(response => response.json())
+            .then(data => {
+                // Handle response data
+                console.log('Videos by time stamp:', data);
+                if(data.message === "Successfully get video by time stamp") {
+                    createChart(data.data); // Call function to create chart with the data
+                } else {
+                    console.error('No data received for the given time range');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching videos by time stamp:', error);
+            });
     });
+
+    // Function to create chart with video count data
+    function createChart(videoData) {
+        const ctx = document.getElementById('time-chart').getContext('2d'); // Make sure you have a <canvas> element with id="time-chart"
+        const labels = videoData.map(item => new Date(item.published_at).toLocaleDateString());
+        const counts = videoData.map(item => item['count(*)']);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Video Count',
+                    data: counts,
+                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    }
 });
