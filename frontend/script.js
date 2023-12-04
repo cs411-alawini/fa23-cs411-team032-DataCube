@@ -103,21 +103,51 @@ document.addEventListener('DOMContentLoaded', (event) => {
         {
             results.forEach((result,index) => {
                 const listItem = document.createElement('div');
-                listItem.className = 'search result';
+                listItem.className = 'search-result-item';
                 listItem.innerHTML = `
                     <div class="rank">${index + 1}</div>
-                    <div class="videoID">${index + 1}</div>
-
-                    <div class="title">${result.title}</div>
+                    <div class="videoID" contenteditable="true">${result.videoID}</div>
+                    <div class="title" contenteditable="true">${result.title}</div>
                     <div class="views">${result.view_count.toLocaleString()} views</div>
+                    <button class="update-btn">Update</button>
+                    <button class="delete-btn">Delete</button>
                 `;
                 searchResult.appendChild(listItem);
+    
+                // Add event listeners for buttons
+                listItem.querySelector('.update-btn').addEventListener('click', () => updateVideo(result.videoID));
+                listItem.querySelector('.delete-btn').addEventListener('click', () => deleteVideo(result.videoID));
             });
         }
         else 
         {
             searchResult.textContent = "No Result Found!";
         }
+    }
+
+    function updateVideo(videoID){
+        // Get the data from the item fields
+        // Make a request to the backend to update the video
+        // Handle the response
+    }
+    
+    function deleteVideo(videoID){
+        // Make a request to the backend to delete the video
+        // Handle the response
+        fetch('http://localhost:4000/video',{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ videoID: videoID })
+        }).then(response => response.json())
+        .then(data => {
+            if(data.message === "Successfully delete video") {
+                console.log("Successfully delete video");
+            } else {
+                console.error('Failed to delete video');
+            }
+        })
     }
     // When the user clicks on the close button, close the modal
     closeBtn.addEventListener('click', () => {
