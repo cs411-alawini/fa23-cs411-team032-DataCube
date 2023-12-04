@@ -291,4 +291,24 @@ footer {
     text-decoration: none;
     cursor: pointer;
   }
+
+#container {
+    width: 100%; /* Take the full width of its parent */
+    max-height: 350px; /* Set a maximum height */
+    overflow: auto; /* Enable scrolling if content overflows */
+    position: relative; /* Relative positioning for absolute children */
+    background-color: #fff; /* Optional background color */
+}
+
+#container canvas {
+    height: auto; /* 设置一个最小高度 */
+    width: 100%; /* Full width to fit container */
+    position: absolute; /* Positioned absolutely to fit into the container */
+    top: 0;
+    left: 0;
+}
+
+
+
+
   
