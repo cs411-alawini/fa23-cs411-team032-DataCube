@@ -5,6 +5,7 @@ const router = express.Router();
 router.route('/')
     .get(videoController.getVideoByTitle)
     .post(videoController.createVideo)
+    .put(videoController.updateVideo)
     .delete(videoController.deleteVideo);
    
 

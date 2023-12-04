@@ -53,6 +53,16 @@ const countVideoByTimeStamp = async (req, res) => {
     }
 }
 
+const updateVideo = async (req, res) => {
+    try{
+        const videos = await videoModel.putVideo(req.body.videoID, req.body.title);
+        res.status(200).send(formatResponse("Successfully put video", videos));
+    }
+    catch(error){
+        res.status(404).send(formatResponse("Failed to put video", error));
+    }
+}
+
 const deleteVideo = async (req, res) => {
     try{
         const videos = await videoModel.deleteVideo(req.body.videoID);
@@ -64,6 +74,7 @@ const deleteVideo = async (req, res) => {
 }
 
 module.exports = {
+    updateVideo,
     deleteVideo,
     getVideoByTitle,
     getTop10TrendngVideosInCategories,

@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 listItem.className = 'search-result-item';
                 listItem.innerHTML = `
                     <div class="rank">${index + 1}</div>
-                    <div class="videoID" contenteditable="true">${result.videoID}</div>
-                    <div class="title" contenteditable="true">${result.title}</div>
+                    <div class="videoID">${result.videoID}</div>
+                    <div class="title" id = title_${result.videoID} contenteditable="true">${result.title}</div>
                     <div class="views">${result.view_count.toLocaleString()} views</div>
                     <button class="update-btn">Update</button>
                     <button class="delete-btn">Delete</button>
@@ -129,9 +129,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function updateVideo(videoID){
-        // Get the data from the item fields
         // Make a request to the backend to update the video
         // Handle the response
+        const title = document.getElementById(`title_${videoID}`).textContent;
+        fetch('http://localhost:4000/video',{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ videoID: videoID, title: title })
+        }).then(response => response.json())
+        .then(data => {
+            if(data.message === "Successfully update video") {
+                console.log("Successfully update video");
+            } else {
+                console.error('Failed to update video');
+            }
+        })
     }
     
     function deleteVideo(videoID){

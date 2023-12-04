@@ -70,6 +70,19 @@ VideoModel.getVideoByTitle = (title) => {
     }).catch((err) => Promise.reject(err));
 }
 
+VideoModel.updateVideo = (videoID, title) => {
+    const baseQuery = `
+        UPDATE Video SET title = ?
+        WHERE videoID = ?;
+    `;
+    return db.execute(baseQuery, [
+        title,
+        videoID
+    ]).then(([results, fields]) => {
+        return Promise.resolve(results && results.affectedRows);
+    }).catch((err) => Promise.reject(err));
+}
+
 VideoModel.deleteVideo = (videoID) => { 
     const baseQuery = `
         DELETE FROM Video WHERE videoID = ${videoID};
