@@ -1,25 +1,35 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Dynamically generate category checkboxes
+    // Fetch categories from the server and create checkboxes
     const categoriesContainer = document.querySelector('.categories');
-    for (let i = 1; i <= 21; i++) {
-        let categoryDiv = document.createElement('div');
-        categoryDiv.className = 'category';
-
-        let input = document.createElement('input');
-        input.type = 'checkbox';
-        input.id = 'category' + i;
-        input.name = 'category';
-        input.value = 'cat' + i;
-
-        let label = document.createElement('label');
-        label.htmlFor = 'category' + i;
-        label.textContent = 'Category ' + i;
-
-        categoryDiv.appendChild(input);
-        categoryDiv.appendChild(label);
-
-        categoriesContainer.appendChild(categoryDiv);
-    }
+    
+    fetch('http://localhost:4000/category')
+        .then(response => response.json())
+        .then(data => {
+            if(data.message === "Successfully get all categories") {
+                data.data.forEach(category => {
+                    let categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category';
+                    
+                    let input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.id = 'category' + category.categoryID;
+                    input.name = 'category';
+                    input.value = category.categoryName.trim(); // Assuming categoryName is a string
+                    
+                    let label = document.createElement('label');
+                    label.htmlFor = 'category' + category.categoryID;
+                    label.textContent = category.categoryName.trim(); // Using trim to remove any trailing newline characters
+                    
+                    categoryDiv.appendChild(input);
+                    categoryDiv.appendChild(label);
+                    
+                    categoriesContainer.appendChild(categoryDiv);
+                });
+            } else {
+                console.error('Failed to fetch categories');
+            }
+        })
+        .catch(error => console.error('Error fetching categories:', error));
 
     // Form submission event
     const form = document.getElementById('category-form');
@@ -37,6 +47,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // When the user clicks the search button, open the modal
     searchBtn.addEventListener('click', () => {
         modal.style.display = "block";
+        // You can add more code here to populate the modal with specific search results
     });
 
     // When the user clicks on the close button, close the modal
