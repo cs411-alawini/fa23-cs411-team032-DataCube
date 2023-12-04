@@ -24,11 +24,14 @@ VideoModel.getTop10TrendngVideos = (categories) => {
 }
 
 VideoModel.countVideoByTimeStamp = (start, end) => {
+    // const baseQuery = `
+    //     SELECT published_at, count(*) as count FROM Video WHERE published_at BETWEEN '${start}' AND '${end}'
+    //     GROUP BY published_at
+    //     ORDER BY published_at
+    //     ;
+    // `;
     const baseQuery = `
-        SELECT published_at, count(*) as count FROM Video WHERE published_at BETWEEN '${start}' AND '${end}'
-        GROUP BY published_at
-        ORDER BY published_at
-        ;
+        CALL GetVideoCountByPublishedDate('${start}', '${end}');
     `;
     return db.execute(baseQuery).then(([results, fields]) => {
         return Promise.resolve(results)

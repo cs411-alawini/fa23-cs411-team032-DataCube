@@ -3,7 +3,9 @@ const CategoryModel = {};
 
 CategoryModel.getAllCategories = () => {
     const baseQuery = `
-        SELECT * FROM Category;
+        select distinct c.categoryID,  c.categoryName
+        from Video v join Category c on v.categoryID = c.categoryID
+        order by c.categoryName asc;
     `;
     return db.execute(baseQuery).then(([results, fields]) => {
         return Promise.resolve(results)

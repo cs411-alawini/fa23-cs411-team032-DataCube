@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 //----------------------------------search bar -------------------------------------------------------
     // Modal event listeners
     searchBtn.addEventListener('click', () => {
-        console.log(searchTerm.value);
         // You can add more code here to populate the modal with specific search results
         performSearch(searchTerm.value);
     });
@@ -86,6 +85,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
     function performSearch(term){
+        event.preventDefault();
         if(modal.style.display === "block"){
             modal.style.display = "none";
             searchResult.innerHTML = "";
@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function displayResult(results){
         searchResult.innerHTML = "";
-        console.log(results);
         if(results.length > 0)
         {
             results.forEach((result,index) => {
@@ -195,7 +194,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     window.addEventListener('click', (event) => {
-        console.log(event.target);
         if (event.target == modal) {
             modal.style.display = "none";
         }
@@ -203,7 +201,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
 
 
-//-----------------------------------------------------button for category ---------------------------------   
+//-----------------------------------------------------button for category ------------------------------------------------------------ 
     // Form submission event
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -227,6 +225,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error('Error posting category IDs:', error);
         });
     });
+
+
+//----------------------------------------------------date and time---------------------------------------------------------------------------
 
     const dateRangeForm = document.getElementById('date-range-form');
     dateRangeForm.addEventListener('submit', function(event) {
