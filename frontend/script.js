@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var searchTerm = document.getElementById("search-input");
     var searchResult = document.getElementById("searchResult");
 
+    // Define a variable outside of your function to keep track of the chart instance
+    let myChart;
+
     // Function to update video rankings on the page
     function updateVideoRankings(videos) {
         const rankingContainer = document.getElementById('ranking-placeholder');
@@ -177,6 +180,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // Handle response data
                 console.log('Videos by time stamp:', data);
                 if(data.message === "Successfully get video by time stamp") {
+                    console.log('Data for chart:', data);
                     createChart(data.data); // Call function to create chart with the data
                 } else {
                     console.error('No data received for the given time range');
@@ -187,13 +191,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
     });
 
-    // Function to create chart with video count data
     function createChart(videoData) {
-        const ctx = document.getElementById('time-chart').getContext('2d'); // Make sure you have a <canvas> element with id="time-chart"
+        console.log('Creating chart with data:', videoData);
+        const canvas = document.getElementById('time-chart');
+        if (!canvas) {
+            console.error('The canvas element was not found in the DOM');
+            return;
+        }
+    
+        const ctx = canvas.getContext('2d');
         const labels = videoData.map(item => new Date(item.published_at).toLocaleDateString());
-        const counts = videoData.map(item => item['count(*)']);
-
-        new Chart(ctx, {
+        const counts = videoData.map(item => item['count']);
+    
+        console.log('Labels:', labels);
+        console.log('Counts:', counts);
+    
+        // If myChart is not null, destroy it before creating a new one
+        if (myChart instanceof Chart) { // More robust check
+            myChart.destroy();
+        }
+    
+        myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
