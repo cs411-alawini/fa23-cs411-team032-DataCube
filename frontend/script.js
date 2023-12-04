@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById("popup-modal");
     const searchBtn = document.getElementById("search-button");
     const closeBtn = document.querySelector(".close");
-    var searchTerm = document.getElementById("search-input");
-    var searchResult = document.getElementById("searchResult");
+    const searchTerm = document.getElementById("search-input");
+    const searchResult = document.getElementById("searchResult");
 
     // Function to update video rankings on the page
     function updateVideoRankings(videos) {
@@ -70,16 +70,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
 //----------------------------------search bar -------------------------------------------------------
     // Modal event listeners
     searchBtn.addEventListener('click', () => {
-        event.preventDefault();
-        modal.style.display = "block";
-        console.log("clicked");
         console.log(searchTerm.value);
         // You can add more code here to populate the modal with specific search results
         performSearch(searchTerm.value);
     });
 
+    searchTerm.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            performSearch(searchTerm.value);
+        }
+    })
+
 
     function performSearch(term){
+        if(modal.style.display === "block"){
+            modal.style.display = "none";
+            searchResult.innerHTML = "";
+            return 0;
+        }
+        modal.style.display = "block";
         const url = `http://localhost:4000/video/?title=${encodeURIComponent(term)}`;
         fetch(url)
         .then(response => {
@@ -106,8 +115,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 listItem.className = 'search result';
                 listItem.innerHTML = `
                     <div class="rank">${index + 1}</div>
-                    <div class="videoID">${index + 1}</div>
-
+                    <div class="videoID">Video ID: ${result.videoID}</div>
+                    <div class="videoID">Channel ID: ${result.channelID}</div>
                     <div class="title">${result.title}</div>
                     <div class="views">${result.view_count.toLocaleString()} views</div>
                 `;
@@ -122,9 +131,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // When the user clicks on the close button, close the modal
     closeBtn.addEventListener('click', () => {
         modal.style.display = "none";
+        console.log("close clicked");
     });
 
     window.addEventListener('click', (event) => {
+        console.log(event.target);
         if (event.target == modal) {
             modal.style.display = "none";
         }
