@@ -311,27 +311,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Add an event listener for the submit event
     createVideoForm.addEventListener('submit', function(event) {
-    // Prevent the default form submission to the server
-    event.preventDefault();
+        // Prevent the default form submission to the server
+        event.preventDefault();
 
-    // Create an object to hold the form data
-    const videoData = {
-        videoID: document.getElementById('videoID').value,
-        channelID: document.getElementById('channelID').value,
-        categoryID: document.getElementById('categoryID').value,
-        dislikes: document.getElementById('dislikes').value,
-        likes: document.getElementById('likes').value,
-        description: document.getElementById('description').value,
-        tags: document.getElementById('tags').value,
-        trending_date: document.getElementById('trending_date').value,
-        title: document.getElementById('title').value,
-        comment_count: document.getElementById('comment_count').value,
-        view_count: document.getElementById('view_count').value,
-        published_at: document.getElementById('published_at').value,
-        region: document.getElementById('region').value
-    };
+        // Create an object to hold the form data
+        const videoData = {
+            videoID: document.getElementById('videoID').value,
+            channelID: document.getElementById('channelID').value,
+            categoryID: document.getElementById('categoryID').value,
+            dislikes: document.getElementById('dislikes').value,
+            likes: document.getElementById('likes').value,
+            description: document.getElementById('description').value,
+            tags: document.getElementById('tags').value,
+            trending_date: document.getElementById('trending_date').value,
+            title: document.getElementById('title').value,
+            comment_count: document.getElementById('comment_count').value,
+            view_count: document.getElementById('view_count').value,
+            published_at: document.getElementById('published_at').value,
+            region: document.getElementById('region').value
+        };
 
-    // Log the video data to the console
-    console.log('Video data submitted:', videoData);
+        // Log the video data to the console
+        console.log('Video data submitted:', videoData);
     });
 });
